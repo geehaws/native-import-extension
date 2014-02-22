@@ -1,0 +1,16 @@
+{
+  "manifest_version": 1,
+
+  "name": "Chute Native Importer",
+  "description": "Import assets into campaigns directly from Instagram and Twitter",
+  "version": "0.1",
+
+  "permissions": [
+    "https://api.getchute.com"
+  ],
+  "content_scripts": {
+    "matches": ["instagram.com", "twitter.com"],
+    "css": "chute-import.css",
+    "js": ["chute-import.js"]
+  }
+}
