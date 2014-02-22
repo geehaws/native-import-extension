@@ -5,6 +5,7 @@ chuteImport.insertImportButton = function() {
   var classNames = ['compPhoto', 'photo'];
   classNames.forEach(function(className) {
     var photoEls = document.getElementsByClassName(className);
+    photoEls = Array.prototype.slice.call(photoEls, 0);
 
     photoEls.forEach(function(photoEl) {
       var chuteIcon = chuteImport.buildImg();
