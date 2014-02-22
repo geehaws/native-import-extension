@@ -10,7 +10,7 @@
   ],
   "content_scripts": {
     "matches": ["instagram.com", "twitter.com"],
-    "css": "chute-import.css",
+    "css": ["chute-import.css"],
     "js": ["chute-import.js"]
   }
 }
