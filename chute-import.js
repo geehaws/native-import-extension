@@ -7,15 +7,18 @@ chuteImport.insertImportButton = function() {
   photoEls = Array.prototype.slice.call(photoEls, 0);
 
   photoEls.forEach(function(photoEl) {
-    var chuteIcon = chuteImport.buildImg();
-    photoEl.appendChild(chuteIcon);
+    var src = photoEl.getElementsByTagName('div')[0].attributes.src.value;
+    var img = chuteImport.buildImg();
+    chuteImport.attachEventListener(img, src);
+    photoEl.appendChild(img);
   });
 };
 
-chuteImport.attachEventListener = function(el) {
+chuteImport.attachEventListener = function(el, src) {
   el.addEventListener('click', function() {
     var request = new XMLHttpRequest();
-    request.open("POST", "//api.getchute.com/album/atVWrunx/assets/import", true);
+    request.open("POST", "//api.getchute.com/v2/albums/atVWrunx/assets/import", true);
+    request.send('urls=[' + src + ']');
   });
 };
 
@@ -24,7 +27,6 @@ chuteImport.buildImg = function() {
   img.src = chrome.extension.getURL('chute-logo.png');
   img.className = "chute-import";
   this.setStyles(img);
-  this.attachEventListener(img);
   return img;
 };
 
