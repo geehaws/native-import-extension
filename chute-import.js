@@ -2,32 +2,39 @@ var chuteImport = {};
 
 chuteImport.insertImportButton = function() {
   var chuteImport = this;
-  var classNames = ['compPhoto', 'photo'];
-  classNames.forEach(function(className) {
-    var photoEls = document.getElementsByClassName(className);
-    photoEls = Array.prototype.slice.call(photoEls, 0);
 
-    photoEls.forEach(function(photoEl) {
-      var chuteIcon = chuteImport.buildImg();
-      photoEl.appendChild(chuteIcon);
-    });
+  var photoEls = document.getElementsByClassName('photo-wrapper');
+  photoEls = Array.prototype.slice.call(photoEls, 0);
+
+  photoEls.forEach(function(photoEl) {
+    var chuteIcon = chuteImport.buildImg();
+    photoEl.appendChild(chuteIcon);
   });
 };
 
-chuteImport.attachEventListeners = function(el) {
+chuteImport.attachEventListener = function(el) {
   el.addEventListener('click', function() {
-    //TODO hit import endpoint
+    var request = new XMLHttpRequest();
+    request.open("POST", "//api.getchute.com/album/atVWrunx/assets/import", true);
   });
 };
 
 chuteImport.buildImg = function() {
-  var img document.createElement('img');
-  img.src = "//chute-icon.png";
+  var img = document.createElement('img');
+  img.src = chrome.extension.getURL('chute-logo.png');
   img.className = "chute-import";
+  this.setStyles(img);
   this.attachEventListener(img);
   return img;
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-  chuteImport.insertImportButton();
-});
+chuteImport.setStyles = function(img) {
+  img.style.height = "20%";
+  img.style.width = "auto";
+  img.style.position = "absolute";
+  img.style.top = "30px";
+  img.style.right = "10px";
+  img.style.zIndex = "100";
+};
+
+chuteImport.insertImportButton();
