@@ -35,7 +35,7 @@ chuteImport.setStyles = function(img) {
   img.style.width = "auto";
   img.style.position = "absolute";
   img.style.top = "30px";
-  img.style.right = "10px";
+  img.style.left = "10px";
   img.style.zIndex = "100";
 };
 
