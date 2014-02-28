@@ -17,8 +17,8 @@ chuteImport.insertImportButton = function() {
 chuteImport.attachEventListener = function(el, src) {
   el.addEventListener('click', function() {
     var request = new XMLHttpRequest();
-    request.open("POST", "//api.getchute.com/v2/albums/atVWrunx/assets/import", true);
-    request.send('urls=[' + src + ']');
+    request.open("POST", "//api.getchute.com/v2/albums/2498348/assets/import?oauth_token=fdc54832e690daa9bc5ed2de8808e16e20c2579f378fd272742877eae49a4ccd&urls="+ src, false);
+    var response = request.send();
   });
 };
 
