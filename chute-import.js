@@ -2,12 +2,8 @@ var chuteImport = {};
 
 chuteImport.start = function() {
   var chuteImport = this;
-
-  var photoEls = document.getElementsByClassName('photo-wrapper');
-  photoEls = Array.prototype.slice.call(photoEls, 0);
-
+  var photoEls = chuteImport.getElements();
   this.insertImportButtons(photoEls);
-
   this.listenForAssetFetch(photoEls);
 };
 
@@ -24,8 +20,7 @@ chuteImport.listenForAssetFetch = function(photoEls) {
   var chuteImport = this;
   var taggedPhotos = photoEls;
   var checkForNewAssets = function() {
-    var photoEls = document.getElementsByClassName('photo-wrapper');
-    photoEls = Array.prototype.slice.call(photoEls, 0);
+    var photoEls = chuteImport.getElements();
     if (photoEls.length > taggedPhotos.length) {
       chuteImport.insertImportButtons(photoEls.slice(taggedPhotos.length));
     } else {
@@ -34,7 +29,6 @@ chuteImport.listenForAssetFetch = function(photoEls) {
   }
 
   var timeout;
-  var debounce;
   var debouncedCall = function() {
     if (timeout) {
       clearTimeout(timeout);
@@ -63,6 +57,15 @@ chuteImport.buildImg = function() {
   this.setStyles(img);
   return img;
 };
+
+chuteImport.getElements = function() {
+  var photoEls = document.getElementsByClassName('photo-wrapper');
+  if (!photoEls.length) {
+    //we're on a timeline page
+    photoEls = document.getElementsByClassName('mediaPhoto');
+  }
+  return Array.prototype.slice.call(photoEls, 0);
+}
 
 chuteImport.setStyles = function(img) {
   img.style.height = "20%";
